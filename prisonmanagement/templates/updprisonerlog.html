@@ -1,0 +1,54 @@
+{% include 'uheader.html' %}
+<div id="page-wrapper" >
+    <div id="page-inner">
+<center>
+    <form action="" method="POST">
+        <input type="hidden" name="id" value="{{data['bid']}}">
+           <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div align="right"><a href="{{url_for('manageprisonerlog')}}"><input class="btn btn-success" type="button" name="cncl" value="BACK" align="right"></a>
+                                </div>
+                                <h3>Prisoner Log</h3>
+                            </div>
+                    <div class="panel-body">
+                    <table class="table table-striped">
+                <tr><td>Prison Name:</td><td> <select class="form-control" name="pname" required>
+                        <option label="SELECT"></option>
+                        {% for row in data["db"] %}
+                    {% if data['res'][0]['pm_fname'] == row['pm_fname'] %}
+                    <option selected value="{{row['pm_id']}}">{{ row['pm_fname']+" "+row['pm_mname']+" "+row['pm_lname']}}</option>
+                    {% else %}
+                    <option  value="{{row['pm_id']}}">{{ row['pm_fname']+" "+row['pm_mname']+" "+row['pm_lname']}}</option>
+                    {% endif %}
+                    {% endfor %}
+                    </select></td></tr>
+                <tr><td>Description :</td><td> <select class="form-control" name="des" required>
+                        <option label="SELECT"></option>
+                        {% for row in data["dbs"] %}
+                    {% if data['res'][0]['logtype_id'] == row['logtype_id'] %}
+                    <option selected value="{{row['logtype_id']}}">{{ row['logtype_name']}}</option>
+                    {% else %}
+                    <option value="{{row['logtype_id']}}">{{ row['logtype_name']}}</option>
+
+                    {% endif %}
+                    {% endfor %}
+                    </select></td></tr>
+                <tr><td>Exit Schedule</td><td><input type="date" value="{{data['res'][0]['pl_exitdate']}}" class="form-control" name="date1" placeholder="Exit Date"  required title="Only accept Date"></td></tr>
+                <tr><td></td><td><input type="time" name="time1" value="{{data['res'][0]['pl_exittime']}}" class="form-control" placeholder="Exit time"  required="" title="Check your time format"></td></tr>
+                <tr><td>Entry Schedule</td><td><input type="date"  value="{{data['res'][0]['pl_entrydate']}}" class="form-control" name="date2" placeholder="Entry Date"  required title="Only accept Date"></td></tr>
+                <tr><td></td><td><input type="time" name="time2" value="{{data['res'][0]['pl_entrytime']}}" class="form-control" placeholder="Entry time"  required="" title="Check your time format"></td></tr>
+                <tr><td>Status :</td><td><select class="form-control" name="status">
+                    <option label="SELECT"></option>
+                        {% if data['res'][0]['pl_status'] == "ACTIVE" %}
+                    <option selected value="ACTIVE">ACTIVE</option>
+                    <option value="COMPLETED">COMPLETED</option>
+                        {% else %}
+                    <option value="ACTIVE">ACTIVE</option>
+                    <option selected value="COMPLETED">COMPLETED</option>
+                         {% endif %}</select></td></tr>
+                <tr><td></td><td><input type="submit" name="sbmt" class="btn btn-primary" value="UPDATE" align="right"></td></tr>
+
+                    </table></div></div>
+        </form>
+</center></div>></div>
+{% include 'ufooter.html' %}

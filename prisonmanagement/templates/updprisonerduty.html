@@ -1,0 +1,67 @@
+{% include 'uheader.html' %}
+<div id="page-wrapper" >
+    <div id="page-inner">
+<center>
+         <form action="" method="POST">
+            <input type="hidden" name="id" value="{{data['bid']}}">
+            <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div align="right"><a href="{{url_for('manageprisonerduty')}}"><input class="btn btn-success" type="button" name="cncl" value="BACK" align="right"></a>
+                                </div>
+                                <h3>Prisoner Duty</h3>
+                            </div>
+                    <div class="panel-body">
+                    <table class="table table-striped">
+                <tr><td>Prison Name:</td><td> <select class="form-control" name="pname" required>
+                        <option label="SELECT"></option>
+                    {% for row in data["db"] %}
+                    {% if data['res'][0]['pm_fname'] == row['pm_fname'] %}
+                    <option selected value="{{row['pm_id']}}">{{ row['pm_fname']+" "+row['pm_mname']+" "+row['pm_lname']}}</option>
+                    {% else %}
+                    <option value="{{row['pm_id']}}">{{ row['pm_fname']+" "+row['pm_mname']+" "+row['pm_lname']}}</option>
+                    {% endif %}{% endfor %}
+                    </select></td></tr>
+                <tr><td>Duty Schedule</td><td><input class="form-control" type="date" value="{{data['res'][0]['pd_date']}}" name="datee" placeholder="Duty Date"  required title="Only accept Date"></td></tr>
+                <tr><td></td><td><input type="time" class="form-control" name="timee" value="{{data['res'][0]['pd_time']}}" placeholder="Duty time"  required="" title="Check your time format"></td></tr>
+                <tr><td>Duty Type:</td><td><select class="form-control" name="type">
+                    <option label="SELECT"></option>
+                    {% if data['res'][0]['pd_type'] == "KITCHEN WORK" %}
+                    <option selected value="KITCHEN WORK">KITCHEN WORK</option>
+                    <option value="GARDENING">GARDENING</option>
+                    <option value="FARMING">FARMING</option>
+                    <option value="CARPENTER">CARPENTER</option>
+                    <option value="CATERING">CATERING</option>
+                    {% elif data['res'][0]['pd_type'] == "GARDENING" %}
+                    <option  value="KITCHEN WORK">KITCHEN WORK</option>
+                    <option selected  value="GARDENING">GARDENING</option>
+                    <option value="FARMING">FARMING</option>
+                    <option value="CARPENTER">CARPENTER</option>
+                    <option value="CATERING">CATERING</option>
+                    {% elif data['res'][0]['pd_type'] == "FARMING" %}
+                    <option  value="KITCHEN WORK">KITCHEN WORK</option>
+                    <option value="GARDENING">GARDENING</option>
+                    <option selected value="FARMING">FARMING</option>
+                    <option value="CARPENTER">CARPENTER</option>
+                    <option value="CATERING">CATERING</option>
+                    {% elif data['res'][0]['pd_type'] == "CARPENTER" %}
+                    <option value="KITCHEN WORK">KITCHEN WORK</option>
+                    <option value="GARDENING">GARDENING</option>
+                    <option value="FARMING">FARMING</option>
+                    <option selected  value="CARPENTER">CARPENTER</option>
+                    <option value="CATERING">CATERING</option>
+                    {% else %}
+                    <optionvalue="KITCHEN WORK">KITCHEN WORK</option>
+                    <option value="GARDENING">GARDENING</option>
+                    <option value="FARMING">FARMING</option>
+                    <option value="CARPENTER">CARPENTER</option>
+                    <option selected  value="CATERING">CATERING</option>
+
+                    {% endif %}
+                </select></td></tr>
+
+                <tr><td></td><td><input class="btn btn-primary"  name="sbmt"  type="submit" value="SUBMIT" align="right"></td></tr>
+
+                    </table></div></div>
+        </form>
+</center></div></div>
+{% include 'ufooter.html' %}

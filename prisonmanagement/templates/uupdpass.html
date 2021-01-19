@@ -1,0 +1,46 @@
+{% include 'uheader.html' %}
+<div id="page-wrapper" >
+    <div id="page-inner">
+<center>
+        <form action="" method="POST">
+           <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div align="right"><a href="{{url_for('user_home')}}"><input class="btn btn-success" type="button" name="cncl" value="BACK" align="right"></a>
+                                </div>
+                                <h3>Change Password</h3>
+                            </div>
+                    <div class="panel-body">
+                    <table class="table table-striped">
+                <tr><td>Old Password :</td><td><input class="form-control" type="password" id="oldp" name="oldp" placeholder="********" required pattern="[a-zA-Z0-9]{8,16}" title="Must have 8-16 characters"></td></tr>
+                <tr><td>New Password :</td><td><input class="form-control" type="password" id="newp" name="newp" placeholder="********" required pattern="[a-zA-Z0-9]{8,16}" title="Must have 8-16 characters" onchange="validatePassword();"></td></tr>
+                <tr><td>Confirm Password :</td><td><input class="form-control" type="password" id="cnfp" name="cnfp" placeholder="********" required pattern="[a-zA-Z0-9]{8,16}" title="Must have 8-16 characters"></td></tr>
+                <tr><td></td><td><input class="btn btn-primary" name="sbmt" type="submit" value="CHANGE" align="right"></td></tr>
+            </table>
+                    </div></div>
+        </form>
+    </center>
+        </div></div>
+
+<script>
+var password=document.getElementById("newp");
+var confirm_password=document.getElementById("cnfp");
+function validatePassword()
+{
+	if(password.value!=confirm_password.value)
+	{
+		confirm_password.setCustomValidity("Password not matching!!!");
+	}
+	else
+	{
+		confirm_password.setCustomValidity('');
+	}
+password.onchange=validatePassword;
+confirm_password.onkeyup=validatePassword;
+}
+
+
+
+
+</script>
+
+{% include 'ufooter.html' %}ml>

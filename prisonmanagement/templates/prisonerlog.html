@@ -1,0 +1,31 @@
+{% include 'uheader.html' %}
+<div id="page-wrapper" >
+    <div id="page-inner">
+<center>
+    <form action="" method="POST">
+           <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div align="right"><a href="{{url_for('manageprisonerlog')}}"><input class="btn btn-success" type="button" name="cncl" value="BACK" align="right"></a>
+                                </div>
+                                <h3>Prisoner Log</h3>
+                            </div>
+                    <div class="panel-body">
+                    <table class="table table-striped">
+                <tr><td>Prison Name:</td><td> <select class="form-control" name="pname" required>
+                        <option label="SELECT"></option>
+                        {% for row in data["blk"] %}<option value="{{row['pm_id']}}">{{ row['pm_fname']+" "+row['pm_mname']+" "+row['pm_lname']}}</option> {% endfor %}
+                    </select></td></tr>
+                <tr><td>Description :</td><td> <select class="form-control" name="des" required>
+                        <option label="SELECT"></option>
+                        {% for row in data["db"] %}<option value="{{row['logtype_id']}}">{{ row['logtype_name']}}</option> {% endfor %}
+                    </select></td></tr>
+                <tr><td>Exit Schedule</td><td><input type="date" class="form-control" name="date1" placeholder="Exit Date"  required title="Only accept Date"></td></tr>
+                <tr><td></td><td><input type="time" name="time1" class="form-control" placeholder="Exit time"  required="" title="Check your time format"></td></tr>
+                <tr><td>Entry Schedule</td><td><input type="date" class="form-control" name="date2" placeholder="Entry Date"  required title="Only accept Date"></td></tr>
+                <tr><td></td><td><input type="time" name="time2" class="form-control" placeholder="Entry time"  required="" title="Check your time format"></td></tr>
+                <tr><td></td><td><input type="submit"  class="btn btn-primary" value="SUBMIT" align="right"></td></tr>
+
+                    </table></div></div>
+        </form>
+</center></div>></div>
+{% include 'ufooter.html' %}

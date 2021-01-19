@@ -1,0 +1,45 @@
+{% include 'header.html' %}
+<div id="page-wrapper" >
+    <div id="page-inner">
+ <center>
+        <form action="" method="POST">
+            <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div align="right"><a href="{{url_for('managestaff')}}"><input class="btn btn-success" type="button" name="cncl" value="BACK" align="right"></a>
+                                </div>
+                                <h3>New Staff</h3>
+                            </div>
+                    <div class="panel-body">
+                    <table class="table table-striped">
+                <tr><td>Name :</td><td><input type="text" class="form-control" name="fname" placeholder="First name" required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="mname" placeholder="Middle name" pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="lname" placeholder="Last name"  pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td>Gender :</td><td>Male<input type="radio" class="form-control" name="gen" required value="Male">Female<input type="radio" class="form-control" name="gen" required value="Female"></td></tr>
+                <tr><td>Date of Birth :</td><td><input type="date" class="form-control" class="form-control" name="dob" required title="Only accept date"></td></tr>
+                <tr><td>Address :</td><td><input type="text" class="form-control" name="house" placeholder="House name" required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="post" placeholder="Post"  required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="city" placeholder="City"  required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="dist" placeholder="District"  required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="state" placeholder="State"  required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="pin" placeholder="Pin"  required pattern="[0-9]{6}" title="Only accept numbers"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="contact" placeholder="Contact"  required pattern="[0-9]{10}" title="Only accept numbers"></td></tr>
+                <tr><td></td><td><input type="email" class="form-control" name="mail" placeholder="E-mail"  required="" title="Check your email format"></td></tr>
+                <tr><td>Rank :</td><td><select class="form-control" name="rank">
+                    <option label="SELECT"></option>
+                    <option value="CONSTEBLE">CONSTEBLE</option>
+                    <option value="HEAD CONSTEBLE">HEAD CONSTEBLE</option>
+                    <option value="ASI">ASI</option>
+                    <option value="SI">SI</option>
+                </select></td></tr>
+                <tr><td>Prison Name:</td><td> <select class="form-control" name="pname" required>
+                        <option label="SELECT"></option>
+                        {% for row in data["db"] %}<option value="{{row['p_id']}}">{{row['p_name']}}</option> {% endfor %}
+                    </select></td></tr>
+                <tr><td></td><td><input class="btn btn-primary" type="submit" value="SUBMIT" align="right"></td></tr>
+
+            </table>
+                    </div></div>
+        </form>
+    </center>
+    </div></div>
+{% include 'footer.html' %}

@@ -1,0 +1,82 @@
+{% include 'uheader.html' %}
+<div id="page-wrapper" >
+    <div id="page-inner">
+<center>
+        <form action="" method="POST">
+            <input type="hidden" name="id" value="{{data['bid']}}">
+            <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div align="right"><a href="{{url_for('manageprisoner')}}"><input class="btn btn-success" type="button" name="cncl" value="BACK" align="right"></a>
+                                </div>
+                                <h3>Prisoner</h3>
+                            </div>
+                    <div class="panel-body">
+                    <table class="table table-striped">
+                <tr><td>Name :</td><td><input type="text" class="form-control" name="fname" value="{{data['res'][0]['pm_fname']}}" placeholder="First name" required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="mname" value="{{data['res'][0]['pm_mname']}}" placeholder="Middle name" pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="lname" value="{{data['res'][0]['pm_lname']}}" placeholder="Last name"  pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td>Gender :</td><td>{% if data['res'][0]['pm_gender'] == "Male"  %}
+                        Male<input checked type="radio" name="gen" required value="Male">Female<input type="radio"  name="gen" required value="Female">
+                {% else %}
+                       Male<input type="radio"  name="gen" required value="Male">Female<input type="radio"  checked  name="gen" required value="Female">
+                {% endif %}</td></tr>
+                <tr><td>Date of Birth :</td><td><input class="form-control" type="date" name="dob" value="{{data['res'][0]['pm_dob']}}" required title="Only accept date"></td></tr>
+                <tr><td>Address :</td><td><input class="form-control" type="text" name="house" value="{{data['res'][0]['pm_house']}}" placeholder="House name" required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="post" placeholder="Post" value="{{data['res'][0]['pm_post']}}"  required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="city" placeholder="City"  value="{{data['res'][0]['pm_city']}}" required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="dist" placeholder="District" value="{{data['res'][0]['pm_district']}}"  required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="state" placeholder="State" value="{{data['res'][0]['pm_state']}}"  required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="pin" placeholder="Pin" value="{{data['res'][0]['pm_pin']}}"  required pattern="[0-9]{6}" title="Only accept numbers"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="contact" placeholder="Contact" value="{{data['res'][0]['pm_contact']}}"  required pattern="[0-9]{10}" title="Only accept numbers"></td></tr>
+                <tr><td>Case :</td><td>
+                     <select class="form-control" name="cname" required>
+                        <option label="SELECT"></option>
+                        {% for row in data["db"] %}
+                         {% if data['res'][0]['case_id']== row['case_id'] %}<option selected value="{{row['case_id']}}">{{ row['case_name'] }}</option>
+                         {% else %}<option  value="{{row['case_id']}}">{{ row['case_name'] }}</option>{% endif %}
+                         {% endfor %}
+                    </select>
+                </td></tr>
+                <tr><td>Sentenced Duration</td><td><input class="form-control" value="{{data['res'][0]['pm_entry']}}" type="date" name="edate" placeholder="Enroll Date"  required  title="Only accept date"></td><td><input type="date" name="rdate" value="{{data['res'][0]['pm_release']}}" class="form-control" placeholder="Release Date"  required title="Only accept time"></td></tr>
+                <tr><td>Block Name:</td><td>
+                     <select class="form-control" name="bname" id="bname" required>
+                        <option label="SELECT"></option>
+                        {% for row in data["blk"] %}
+                         {% if data['res'][0]['block_name']== row['block_name'] %}
+                         <option selected value="{{row['block_id']}}">{{ row['block_name'] }}</option>
+                         {% else %}
+                         <option value="{{row['block_id']}}">{{ row['block_name'] }}</option>
+                         {% endif %}
+                         {% endfor %}
+                    </select>
+                </td></tr>
+                <tr><td>Cell Number:</td><td>
+                     <select class="form-control" name="cel" required id="response">
+                        <option label="SELECT"></option>
+
+                    </select>
+                </td></tr>
+
+<tr><td></td><td><input class="btn btn-primary" type="submit" name="sbmt" value="UPDATE" align="right">
+
+                    </table></div></div>
+        </form>
+    </center>
+<script>
+        $(document).ready(function(){
+             selected_value = $('#bname').val()
+
+                $.get("/get_priscell/?req=1&action="+selected_value+"&p_id={{data['res'][0]['pm_id']}}",function(response){
+                    $('#response').html(response)
+                });
+            $('#bname').change(function(){
+                selected_value = $(this).val()
+
+                $.get("/get_priscell/?req=1&action="+selected_value+"&p_id={{data['res'][0]['pm_id']}}",function(response){
+                    $('#response').html(response)
+                });
+            });
+
+        });
+</script></div></div>
+{% include 'ufooter.html' %}

@@ -1,0 +1,33 @@
+{% include 'header.html' %}
+<div id="page-wrapper" >
+    <div id="page-inner">
+    <center>
+        <form action="" method="POST">
+            <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div align="right"><a href="{{url_for('manageprison')}}"><input class="btn btn-success" type="button" name="cncl" value="BACK" align="right"></a>
+                                </div>
+                                <h3>New Prison</h3>
+                            </div>
+                    <div class="panel-body">
+                        <table class="table table-striped">
+                <tr><td>Prison Name :</td><td><input class="form-control" type="text" name="pname" placeholder="Prison name" required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td>Category :</td><td>
+                    <select class="form-control" name="cat" required>
+                        <option label="SELECT"></option>
+                        {% for row in data["db"] %}<option value="{{row['cat_id']}}">{{row['cat_category']}}</option> {% endfor %}
+                    </select></td></tr>
+                <tr><td>Post :</td><td><input class="form-control" type="text" name="post" placeholder="Post"  required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td>City :</td><td><input class="form-control" type="text" name="city" placeholder="City"  required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td>District :</td><td><input class="form-control" class="form-control" type="text" name="dist" placeholder="District"  required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td>State :</td><td><input class="form-control" type="text" name="state" placeholder="State"  required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td>Pin :</td><td><input class="form-control" type="text" name="pin" placeholder="Pin"  required pattern="[0-9]{6}" title="Only accept numbers"></td></tr>
+                <tr><td>Contact :</td><td><input class="form-control" type="text" name="contact" placeholder="Contact"  required pattern="[0-9]{10}" title="Only accept numbers"></td></tr>
+                <tr><td>E-mail :</td><td><input class="form-control" type="email" name="mail" placeholder="E-mail"  required="" title="Check your email format"></td></tr>
+                            <tr><td></td><td><input class="btn btn-primary" name="sbmt" type="submit" value="SUBMIT" align="right"></td></tr>
+
+            </table>
+        </form>
+    </center>
+    </div></div>
+{% include 'footer.html' %}

@@ -1,0 +1,104 @@
+{% include 'uheader.html' %}
+<div id="page-wrapper" >
+    <div id="page-inner">
+<center>
+       <form action="" method="GET">
+           <input type="hidden" name="id" value="{{data['bid']}}">
+           <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div align="right"><a href="{{url_for('managestaffduty')}}"><input class="btn btn-success" type="button" name="cncl" value="BACK" align="right"></a>
+                                </div>
+                                <h3>Update Duty</h3>
+                            </div>
+                    <div class="panel-body">
+                    <table class="table table-striped">
+                <tr><td>Staff Name:</td><td> <select class="form-control" name="pname" required>
+                        <option label="SELECT"></option>
+                        {% for row in data["db"] %}
+                        {% endfor %}
+                </select></td></tr>
+                <tr><td>Duty Schedule</td><td><input class="form-control" value="{{data['res'][0]['sd_date']}}" type="date" name="datee" placeholder="Duty Date"  required title="Only accept Date"></td></tr>
+                <tr><td></td><td><input type="time" class="form-control" value="{{data['res'][0]['sd_time']}}" name="timee" placeholder="Duty time"  required="" title="Check your time format"></td></tr>
+                <tr><td>Duty Type:</td><td><select class="form-control" name="type">
+                    <option label="SELECT"></option>
+                    {% if data['res'][0]['sd_type'] == "OFFICE" %}
+                    <option SELECTED value="OFFICE">OFFICE</option>
+                    <option value="GENERAL DUTY">GENERAL DUTY</option>
+                     <option value="GUARD">GUARD</option>
+                    <option value="KITCHEN">KITCHEN</option>
+                    <option value="GARDEN">GARDEN</option>
+                    <option value="FARM">FARM</option>
+                    <option value="WORKSHOP">WORKSHOP</option>
+                    <option value="OFF DAY">OFF DAY</option>
+                    {% elif data['res'][0]['sd_type'] == "GENERAL DUTY" %}
+                    <option  value="OFFICE">OFFICE</option>
+                    <option SELECTED value="GENERAL DUTY">GENERAL DUTY</option>
+                     <option value="GUARD">GUARD</option>
+                    <option value="KITCHEN">KITCHEN</option>
+                    <option value="GARDEN">GARDEN</option>
+                    <option value="FARM">FARM</option>
+                    <option value="WORKSHOP">WORKSHOP</option>
+                    <option value="OFF DAY">OFF DAY</option>
+                    {% elif data['res'][0]['sd_type'] == "GUARD" %}
+                    <option  value="OFFICE">OFFICE</option>
+                    <option value="GENERAL DUTY">GENERAL DUTY</option>
+                     <option SELECTED value="GUARD">GUARD</option>
+                    <option value="KITCHEN">KITCHEN</option>
+                    <option value="GARDEN">GARDEN</option>
+                    <option value="FARM">FARM</option>
+                    <option value="WORKSHOP">WORKSHOP</option>
+                    <option value="OFF DAY">OFF DAY</option>
+                    {% elif data['res'][0]['sd_type'] == "KITCHEN" %}
+                    <option  value="OFFICE">OFFICE</option>
+                    <option value="GENERAL DUTY">GENERAL DUTY</option>
+                     <option  value="GUARD">GUARD</option>
+                    <option SELECTED value="KITCHEN">KITCHEN</option>
+                    <option value="GARDEN">GARDEN</option>
+                    <option value="FARM">FARM</option>
+                    <option value="WORKSHOP">WORKSHOP</option>
+                    <option value="OFF DAY">OFF DAY</option>
+                    {% elif data['res'][0]['sd_type'] == "GARDEN" %}
+                    <option  value="OFFICE">OFFICE</option>
+                    <option value="GENERAL DUTY">GENERAL DUTY</option>
+                     <option  value="GUARD">GUARD</option>
+                    <option  value="KITCHEN">KITCHEN</option>
+                    <option SELECTED value="GARDEN">GARDEN</option>
+                    <option value="FARM">FARM</option>
+                    <option value="WORKSHOP">WORKSHOP</option>
+                    <option value="OFF DAY">OFF DAY</option>
+                    {% elif data['res'][0]['sd_type'] == "FARM" %}
+                    <option  value="OFFICE">OFFICE</option>
+                    <option value="GENERAL DUTY">GENERAL DUTY</option>
+                     <option  value="GUARD">GUARD</option>
+                    <option  value="KITCHEN">KITCHEN</option>
+                    <option value="GARDEN">GARDEN</option>
+                    <option SELECTED value="FARM">FARM</option>
+                    <option value="WORKSHOP">WORKSHOP</option>
+                    <option value="OFF DAY">OFF DAY</option>
+                    {% elif data['res'][0]['sd_type'] == "WORKSHOP" %}
+                    <option  value="OFFICE">OFFICE</option>
+                    <option value="GENERAL DUTY">GENERAL DUTY</option>
+                     <option  value="GUARD">GUARD</option>
+                    <option  value="KITCHEN">KITCHEN</option>
+                    <option value="GARDEN">GARDEN</option>
+                    <option value="FARM">FARM</option>
+                    <option SELECTED value="WORKSHOP">WORKSHOP</option>
+                    <option value="OFF DAY">OFF DAY</option>
+                    {% else %}
+                    <option  value="OFFICE">OFFICE</option>
+                    <option value="GENERAL DUTY">GENERAL DUTY</option>
+                     <option  value="GUARD">GUARD</option>
+                    <option  value="KITCHEN">KITCHEN</option>
+                    <option value="GARDEN">GARDEN</option>
+                    <option value="FARM">FARM</option>
+                    <option value="WORKSHOP">WORKSHOP</option>
+                    <option SELECTED value="OFF DAY">OFF DAY</option>
+                    {% endif %}
+                </select></td></tr>
+
+                <tr><td></td><td><input type="submit" name="sbmt" class="btn btn-primary" value="SUBMIT" align="right"></td></tr>
+
+                    </table></div></div>
+        </form>
+</center></div></div>
+{% include 'ufooter.html' %}

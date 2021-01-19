@@ -1,0 +1,31 @@
+{% include 'header.html' %}
+<div id="page-wrapper" >
+    <div id="page-inner">
+          <center>
+                <form action="" method="POST">
+                     <input type="hidden" name="id" value="{{data['bid']}}">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div align="right"><a href="{{url_for('manageblock')}}"><input class="btn btn-success" type="button" name="cncl" value="BACK" align="right"></a>
+                                </div>
+                                <h3>New Block</h3>
+                            </div>
+                    <div class="panel-body">
+                    <table class="table table-striped">
+                        <tr><td>Block Name :</td><td><input class="form-control"  type="text" name="bname" placeholder="Block name" required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                        <tr><td>Prison Name :</td><td>
+                            <select class="form-control"  name="pname" required>
+                                <option label="SELECT"></option>
+                                {% for row in data["db"] %}<option value="{{row['p_id']}}">{{row['p_name']}}</option> {% endfor %}
+                            </select></td></tr>
+                        <tr><td></td><td><input class="btn btn-primary" type="submit" name="sbmt" value="SUBMIT" align="right">&nbsp;<a href="{{url_for('manageblock')}}"><input class="btn btn-danger" type="button" name="cncl" value="CANCEL" align="right"></a></td></tr>
+                    </table>
+                    </div>
+                        </div>
+                </form>
+            </center>
+
+    </div>
+</div>
+
+{% include 'footer.html' %}

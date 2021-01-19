@@ -1,0 +1,24 @@
+{% include 'header.html' %}
+<div id="page-wrapper" >
+    <div id="page-inner">
+    <center>
+        <form action="" method="GET">
+             <input type="hidden" name="id" value="{{data['bid']}}">
+           <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div align="right"><a href="{{url_for('managecase')}}"><input class="btn btn-success" type="button" name="cncl" value="BACK" align="right"></a>
+                                </div>
+                                <h3>Case</h3>
+                            </div>
+                    <div class="panel-body">
+                    <table class="table table-striped">
+                <tr><td>Case Name :</td><td><input  value="{{data['res'][0]['case_name']}}" class="form-control" type="text" name="cname" placeholder="Case name" required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td>Case Description:</td><td><textarea  class="form-control" name="cdes" placeholder="Case details,rules,etc....."  required pattern="[a-zA-Z\s]{1,1000}" title="Only accept characters">{{data['res'][0]['case_discription']}}</textarea></td></tr>
+                <tr><td></td><td><input class="btn btn-primary" name="sbmt" type="submit" value="UPDATE" align="right"></td></tr>
+
+            </table>
+                         </div></div>
+        </form>
+    </center>
+ </div></div>
+{% include 'footer.html' %}

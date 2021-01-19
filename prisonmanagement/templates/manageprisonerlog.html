@@ -1,0 +1,85 @@
+{% include 'uheader.html' %}
+<div id="page-wrapper" >
+            <div id="page-inner">
+<div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+
+                            <div align="right"><a href="{{url_for('prisonerlog')}}"><input type="button" class="btn btn-info" value="PRISONER LOG" ></a>&nbsp;<a href="{{url_for('user_home')}}"><input type="button" class="btn btn-success" value="BACK" ></a>
+                        </div>
+                            <h3> Prisoner Log </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Prisoner Name</th>
+                                            <th>Exited Date</th>
+                                            <th>Exited Time</th>
+                                            <th>Entry Date</th>
+                                            <th>Entry Time</th>
+                                            <th>Category</th>
+                                            <th>Status</th>
+                                            <th>Manage</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for i in range(data["db"]|length) %}
+                                    {% set row=data["db"][i] %}
+                                    {% set i=i+1 %}
+                                    {% if i%2==0 %}
+                                        <tr class="odd gradeC">
+                                            <td>{{ i }}</td>
+                                            <td>{{ row['pm_fname']+" "+row['pm_mname']+" "+row['pm_lname']}}</td>
+                                            <td>{{ row['pl_exitdate']}}</td>
+                                            <td>{{ row['pl_exittime']}}</td>
+                                            <td>{{ row['pl_entrydate'] }}</td>
+                                            <td>{{ row['pl_entrytime'] }}</td>
+                                            <td>{{ row['logtype_name']}}</td>
+                                            <td>{{ row['pl_status']}}</td>
+                                            <td class="text-center">
+                                            <a href="{{url_for('updprisonerlog')}}?id={{ row['pl_id'] }}"><input type="button" class="btn btn-primary" name="upd" value="Update"></a>
+
+                                                <a href="?id={{ row['pl_id'] }}"><input type="button" class="btn btn-danger" name="del" value="Delete" onclick="return confirm('Are you sure ?')"></a>
+                                            </td>
+
+                                        </tr>
+                                    {% else %}
+                                        <tr class="even gradeX">
+                                          <td>{{ i }}</td>
+                                            <td>{{ row['pm_fname']+" "+row['pm_mname']+" "+row['pm_lname']}}</td>
+                                            <td>{{ row['pl_exitdate']}}</td>
+                                            <td>{{ row['pl_exittime']}}</td>
+                                            <td>{{ row['pl_entrydate'] }}</td>
+                                            <td>{{ row['pl_entrytime'] }}</td>
+                                            <td>{{ row['logtype_name']}}</td>
+                                            <td>{{ row['pl_status']}}</td>
+                                            <td class="text-center">
+                                            <a href="{{url_for('updprisonerlog')}}?id={{ row['pl_id'] }}"><input type="button" class="btn btn-primary" name="upd" value="Update"></a>
+
+                                                <a href="?id={{ row['pl_id'] }}"><input type="button" class="btn btn-danger" name="del" value="Delete" onclick="return confirm('Are you sure ?')"></a>
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                     {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--End Advanced Tables -->
+                </div>
+</div></div>
+</div>
+<script>
+            $(document).ready(function () {
+                $('#dataTables-example').dataTable();
+            });
+    </script>
+{% include 'ufooter.html' %}

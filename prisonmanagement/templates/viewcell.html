@@ -1,0 +1,49 @@
+{% include 'header.html' %}
+<div id="page-wrapper" >
+    <div id="page-inner">
+<center>
+        <form action="" method="POST">
+            <input type="hidden" name="id" value="{{data['bid']}}">
+           <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div align="right"><a href="{{url_for('managecell')}}"><input class="btn btn-success" type="button" name="cncl" value="BACK" align="right"></a>
+                                </div>
+                                <h3>Cell</h3>
+                            </div>
+                    <div class="panel-body">
+                    <table class="table table-striped">
+                <tr><td>Cell Number :</td><td><input disabled class="form-control" type="text" name="cnum" placeholder="Cell Number" value="{{data['res'][0]['cell_num']}}" pattern="[a-zA-Z0-9]{1,4}" title="Only accept characters"></td></tr>
+                <tr><td>Prison Name :</td><td>
+                    <select disabled class="form-control" id="pname" name="pname" required>
+                        <option label="SELECT"></option>
+                        {% for row in data["db"] %}
+                                    {% if data['res'][0]['p_name'] == row['p_name'] %}
+                                    <option selected  value="{{row['p_id']}}">{{row['p_name']}}</option>
+                                    {% else %}
+                                    <option  value="{{row['p_id']}}">{{row['p_name']}}</option>
+                                    {% endif %}
+                                {% endfor %}
+                    </select></td></tr>
+                <tr><td>Block Name :</td><td>
+                        <input disabled class="form-control" type="text" name="cnum" placeholder="Cell Number" value="{{data['res'][0]['block_name']}}" pattern="[a-zA-Z0-9]{1,4}" title="Only accept characters"></td></tr>
+
+            </table>
+                    </div></div>
+        </form>
+    </center>
+        </div></div>
+<script>
+        $(document).ready(function(){
+
+            $('#pname').change(function(){
+                selected_value = $(this).val()
+
+                $.get("/get_prisblock/?req=1&action="+selected_value,function(response){
+                    $('#response').html(response)
+                });
+            });
+
+        });
+</script>
+
+{% include 'footer.html' %}

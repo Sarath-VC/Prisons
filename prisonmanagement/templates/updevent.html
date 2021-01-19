@@ -1,0 +1,25 @@
+{% include 'header.html' %}
+<div id="page-wrapper" >
+    <div id="page-inner">
+<center>
+        <form action="" method="GET">
+            <input type="hidden" name="id" value="{{data['bid']}}">
+           <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div align="right"><a href="{{url_for('manageevent')}}"><input class="btn btn-success" type="button" name="cncl" value="BACK" align="right"></a>
+                                </div>
+                                <h3>EVENT</h3>
+                            </div>
+                    <div class="panel-body">
+                    <table class="table table-striped">
+                <tr><td>Event Name :</td><td><input type="text"  value="{{data['res'][0]['eve_name']}}" class="form-control" name="ename" placeholder="Event name" required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td>Event Description :</td><td><textarea class="form-control" name="edes" placeholder="Details"  required pattern="[a-zA-Z\s]{1,500}" title="Only accept characters">{{data['res'][0]['eve_description']}}</textarea></td></tr>
+                <tr><td>Date :</td><td><input type="date" value="{{data['res'][0]['eve_date']}}" class="form-control" name="dat" required title="Only accept date"></td></tr>
+                <tr><td>Time :</td><td><input type="time" value="{{data['res'][0]['eve_time']}}" class="form-control" name="tim" required title="Only accept time"></td></tr>
+                <tr><td></td><td><input class="btn btn-primary" name="sbmt" type="submit" value="UPDATE" align="right"></td></tr>
+            </table>
+                    </div></div>
+        </form>
+    </center>
+    </div></div>
+{% include 'footer.html' %}

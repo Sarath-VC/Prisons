@@ -1,0 +1,72 @@
+{% include 'header.html' %}
+<div id="page-wrapper" >
+    <div id="page-inner">
+ <center>
+        <form action="" method="POST">
+            <input type="hidden" name="id" value="{{data['bid']}}">
+            <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div align="right"><a href="{{url_for('managestaff')}}"><input class="btn btn-success" type="button" name="cncl" value="BACK" align="right"></a>
+                                </div>
+                                <h3>Staff</h3>
+                            </div>
+                    <div class="panel-body">
+                    <table class="table table-striped">
+                <tr><td>Name :</td><td><input type="text" disabled value="{{data['res'][0]['staff_fname']}}" class="form-control" name="fname" placeholder="First name" required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="mname" disabled value="{{data['res'][0]['staff_mname']}}" placeholder="Middle name" pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="lname" disabled value="{{data['res'][0]['staff_lname']}}" placeholder="Last name"  pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td>Gender :</td><td>{% if data['res'][0]['staff_gender'] == "Male"  %}
+                        Male<input checked type="radio" disabled class="form-control" name="gen" required value="Male">Female<input type="radio" disabled class="form-control" name="gen" required value="Female">
+                {% else %}
+                       Male<input type="radio" disabled class="form-control" name="gen" required value="Male">Female<input type="radio" disabled checked class="form-control" name="gen" required value="Female">
+                {% endif %}</td></tr>
+                <tr><td>Date of Birth :</td><td><input type="date" disabled value="{{data['res'][0]['staff_dob']}}" class="form-control" class="form-control" name="dob" required title="Only accept date"></td></tr>
+                <tr><td>Address :</td><td><input type="text" class="form-control" name="house" disabled value="{{data['res'][0]['staff_house']}}" placeholder="House name" required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="post" disabled value="{{data['res'][0]['staff_post']}}" placeholder="Post"  required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="city" disabled value="{{data['res'][0]['staff_city']}}" placeholder="City"  required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="dist" disabled value="{{data['res'][0]['staff_district']}}" placeholder="District"  required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="state" disabled value="{{data['res'][0]['staff_state']}}" placeholder="State"  required pattern="[a-zA-Z\s]{1,50}" title="Only accept characters"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="pin" disabled value="{{data['res'][0]['staff_pin']}}" placeholder="Pin"  required pattern="[0-9]{6}" title="Only accept numbers"></td></tr>
+                <tr><td></td><td><input type="text" class="form-control" name="contact" disabled value="{{data['res'][0]['staff_contact']}}" placeholder="Contact"  required pattern="[0-9]{10}" title="Only accept numbers"></td></tr>
+                <tr><td></td><td><input type="email" class="form-control" name="mail" disabled value="{{data['res'][0]['staff_email']}}" placeholder="E-mail"  required="" title="Check your email format"></td></tr>
+                <tr><td>Rank :</td><td><select disabled class="form-control" name="rank">
+                    <option label="SELECT"></option>
+                    {% if data['res'][0]['staff_rank'] == "CONSTEBLE" %}
+                    <option selected value="CONSTEBLE">CONSTEBLE</option>
+                    <option value="HEAD CONSTEBLE">HEAD CONSTEBLE</option>
+                    <option value="ASI">ASI</option>
+                    <option value="SI">SI</option>
+                    {% elif data['res'][0]['staff_rank'] == "HEAD CONSTEBLE" %}
+                    <option value="CONSTEBLE">CONSTEBLE</option>
+                    <option selected  value="HEAD CONSTEBLE">HEAD CONSTEBLE</option>
+                    <option value="ASI">ASI</option>
+                    <option value="SI">SI</option>
+                    {% elif data['res'][0]['staff_rank'] == "ASI" %}
+                    <option value="CONSTEBLE">CONSTEBLE</option>
+                    <option value="HEAD CONSTEBLE">HEAD CONSTEBLE</option>
+                    <option selected value="ASI">ASI</option>
+                    <option value="SI">SI</option>
+                    {% elif data['res'][0]['staff_rank'] == "SI" %}
+                    <option value="CONSTEBLE">CONSTEBLE</option>
+                    <option value="HEAD CONSTEBLE">HEAD CONSTEBLE</option>
+                    <option value="ASI">ASI</option>
+                    <option selected value="SI">SI</option>
+                    {% endif %}
+                </select></td></tr>
+                <tr><td>Prison Name:</td><td> <select disabled class="form-control" name="pname" required>
+                       {% for row in data["db"] %}
+                                    {% if data['res'][0]['p_name'] == row['p_name'] %}
+                                    <option selected  value="{{row['p_id']}}">{{row['p_name']}}</option>
+                                    {% else %}
+                                    <option  value="{{row['p_id']}}">{{row['p_name']}}</option>
+                                    {% endif %}
+                                {% endfor %}
+                    </select></td></tr>
+
+
+            </table>
+                    </div></div>
+        </form>
+    </center>
+    </div></div>
+{% include 'footer.html' %}
